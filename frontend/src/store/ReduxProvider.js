@@ -6,7 +6,7 @@ import store from './index';
 export default function ReduxProvider({ children }) {
   return (
     <Provider store={store}>
-      {/* <NavbarWrapper /> */}
+      
       {children}
     </Provider>
   )

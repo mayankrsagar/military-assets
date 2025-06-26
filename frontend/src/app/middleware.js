@@ -1,21 +1,14 @@
-import { NextResponse } from 'next/server';
 
 export function middleware(req) {
-  const { nextUrl, cookies, headers } = req
-  const token =
-    cookies.get('token')?.value ||
-    headers.get('authorization')?.split(' ')[1]
-  const isAuthPage = nextUrl.pathname.startsWith('/login')
+  const { cookies, nextUrl } = req
+  const token = cookies.get('token')?.value
+  const isPublic = nextUrl.pathname.startsWith('/login') || nextUrl.pathname.startsWith('/register')
 
-  if (!token && !isAuthPage) {
+  if (!token && !isPublic) {
     return NextResponse.redirect(new URL('/login', req.url))
   }
-  if (token && isAuthPage) {
+  if (token && isPublic) {
     return NextResponse.redirect(new URL('/dashboard', req.url))
   }
   return NextResponse.next()
-}
-
-export const config = {
-  matcher: ['/((?!_next|api|favicon.ico).*)']
 }

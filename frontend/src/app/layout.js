@@ -1,5 +1,6 @@
 import './globals.css';
 
+import NavbarWrapper from '@/components/NavWrapper';
 import ReduxProvider from '@/store/ReduxProvider';
 
 export const metadata = {
@@ -12,6 +13,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <ReduxProvider>
+          <NavbarWrapper/>
           <main className="min-h-screen bg-gray-50">{children}</main>
         </ReduxProvider>
       </body>
